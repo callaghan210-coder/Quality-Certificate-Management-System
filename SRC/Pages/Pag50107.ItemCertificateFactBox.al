@@ -1,11 +1,9 @@
-page 50104 "Item Certificate List"
+page 50107 "Item CertificateFactBox"
 {
-    Caption = 'Item Certificate List';
-    PageType = Card;
+    Caption = 'Item CertificateFactBox';
+    PageType = CardPart;
     SourceTable = "Item Certificate";
-    UsageCategory = Administration;
-    ApplicationArea = All;
-
+    
     layout
     {
         area(Content)
@@ -13,7 +11,7 @@ page 50104 "Item Certificate List"
             group(General)
             {
                 Caption = 'General';
-
+                
                 field("No."; Rec."No.")
                 {
                     ApplicationArea = All;
@@ -24,20 +22,10 @@ page 50104 "Item Certificate List"
                     ApplicationArea = All;
                     ToolTip = 'Specifies the value of the CA Code field.', Comment = '%';
                 }
-                field("Item No"; Rec."Item No")
-                {
-                    ApplicationArea = All;
-                    ToolTip = 'Specifies the value of the Item No field.', Comment = '%';
-                }
                 field("Issued Date"; Rec."Issued Date")
                 {
                     ApplicationArea = All;
                     ToolTip = 'Specifies the value of the Issued Date field.', Comment = '%';
-                }
-                field("Last Prolonged Date"; Rec."Last Prolonged Date")
-                {
-                    ApplicationArea = All;
-                    ToolTip = 'Specifies the value of the Last Prolonged Date field.', Comment = '%';
                 }
             }
         }

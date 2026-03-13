@@ -3,9 +3,20 @@ page 50101 "Item Certificate Card"
     Caption = 'Item Certificate Card';
     PageType = Card;
     SourceTable = "Item Certificate";
+    UsageCategory = Administration;
+    ApplicationArea = All;
 
     layout
     {
+        area(FactBoxes)
+        {
+            part(ItemCertificateFactBox; "Item CertificateFactBox")
+            {
+                ApplicationArea = All;
+                SubPageLink = "No." = field("No.");
+                Caption = 'Item Certificate FactBox';
+            }
+        }
         area(Content)
         {
             group(General)

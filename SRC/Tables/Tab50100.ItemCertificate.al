@@ -2,7 +2,7 @@ table 50100 "Item Certificate"
 {
     Caption = 'Item Certificate';
     DataClassification = ToBeClassified;
-    
+
     fields
     {
         field(10; "No."; Code[20])
@@ -17,7 +17,7 @@ table 50100 "Item Certificate"
         field(30; "Item No"; Code[20])
         {
             Caption = 'Item No';
-            TableRelation = Item."No.";
+            TableRelation = "Item"."No.";
         }
         field(40; "Issued Date"; Date)
         {

@@ -1,8 +1,10 @@
 page 50106 "Item Certificate Action ListPa"
 {
-    Caption = 'Item Certificate Action ListPa';
+    Caption = 'Item Certificate Action ListPart';
     PageType = ListPart;
     SourceTable = "Item Certificate Action";
+    UsageCategory = Administration;
+    ApplicationArea = All;
 
     layout
     {
