@@ -3,7 +3,7 @@ page 50101 "Item Certificate Card"
     Caption = 'Item Certificate Card';
     PageType = Card;
     SourceTable = "Item Certificate";
-    
+
     layout
     {
         area(Content)
@@ -11,7 +11,7 @@ page 50101 "Item Certificate Card"
             group(General)
             {
                 Caption = 'General';
-                
+
                 field("No."; Rec."No.")
                 {
                     ApplicationArea = All;
@@ -37,6 +37,12 @@ page 50101 "Item Certificate Card"
                     ApplicationArea = All;
                     ToolTip = 'Specifies the value of the Last Prolonged Date field.', Comment = '%';
                 }
+            }
+            part(ItemListPart; "Item Certificate Action ListPa")
+            {
+                ApplicationArea = All;
+                SubPageLink = "Certificate No." = field("No.");
+                Caption = 'Item Certificate Action ListPart';
             }
         }
     }
