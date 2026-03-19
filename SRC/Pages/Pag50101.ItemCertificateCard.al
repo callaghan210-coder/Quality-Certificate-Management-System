@@ -3,8 +3,8 @@ page 50101 "Item Certificate Card"
     Caption = 'Item Certificate Card';
     PageType = Card;
     SourceTable = "Item Certificate";
-    UsageCategory = Administration;
-    ApplicationArea = All;
+    //UsageCategory = Administration;
+    //ApplicationArea = All;
 
     layout
     {
@@ -107,7 +107,7 @@ page 50101 "Item Certificate Card"
                 Caption = 'Reject';
                 ApplicationArea = All;
                 Enabled = Rec.Status = Rec.Status::"Pending Approval";
-                Visible = (UserId = Rec."Approver User ID");
+                Visible = (UserId = Rec."Approver User Id");
                 trigger OnAction()
                 begin
                     if UserId <> Rec."Approver User Id" then

@@ -17,7 +17,6 @@ table 50100 "Item Certificate"
         field(30; "Item No"; Code[20])
         {
             Caption = 'Item No';
-            TableRelation = "Item"."No.";
         }
         field(40; "Issued Date"; Date)
         {

@@ -22,7 +22,7 @@ page 50105 "Actions List"
                     ApplicationArea = All;
                     ToolTip = 'Specifies the value of the Action Date field.', Comment = '%';
                 }
-                field("Action Type "; Rec."Action Type ")
+                field("Action Type"; Rec."Action Type")
                 {
                     ApplicationArea = All;
                     ToolTip = 'Specifies the value of the Action Type field.', Comment = '%';

@@ -46,7 +46,7 @@ page 50110 "Certificate Cue Page"
                         CertRec: Record "Item Certificate Action";
                     begin
                         CertRec.SetFilter("Expiration Date", '>%1', Today());
-                        Page.Run(Page::"Item Certificate List", CertRec);
+                        Page.Run(Page::"Actions List", CertRec);
                     end;
                 }
                 field("Revoked Certificates"; Rec."Revoked Certificates")
@@ -57,7 +57,7 @@ page 50110 "Certificate Cue Page"
                     var
                         CertAction: Record "Item Certificate Action";
                     begin
-                        CertAction.SetRange("Action Type ", CertAction."Action Type "::Revoked);
+                        CertAction.SetRange("Action Type", CertAction."Action Type"::Revoked);
                         Page.Run(Page::"Actions List", CertAction);
                     end;
                 }
@@ -88,7 +88,7 @@ page 50110 "Certificate Cue Page"
         Rec."Active Certificates" := Cert.Count();
         // Revoked
         Cert.Reset();
-        Cert.SetRange("Action Type ", Cert."Action Type "::Revoked);
+        Cert.SetRange("Action Type", Cert."Action Type"::Revoked);
         Rec."Revoked Certificates" := Cert.Count();
         if not Rec.Insert() then
             Rec.Modify();

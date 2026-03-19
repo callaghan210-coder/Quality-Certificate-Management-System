@@ -2,12 +2,13 @@ table 50103 "Certificate Cue"
 {
     Caption = 'Certificate Cue';
     DataClassification = ToBeClassified;
-    
+
     fields
     {
         field(1; "Primary Key"; Code[10])
         {
             Caption = 'Primary Key';
+            TableRelation = "Item Certificate Action"."Certificate No.";
         }
         field(2; "Expired Certificates"; Integer)
         {

@@ -53,9 +53,9 @@ page 50109 "Role Center Page"
         {
             action("New Item Certificate")
             {
-                RunObject = Page "Item Certificate Card";
-                RunPageMode = Create;
                 ApplicationArea = All;
+                RunObject = Page "Item Certificate Card";
+                //RunPageMode = Create;
             }
             action("Validate Certificates")
             {

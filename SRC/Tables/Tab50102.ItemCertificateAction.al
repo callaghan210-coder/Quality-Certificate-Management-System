@@ -15,11 +15,12 @@ table 50102 "Item Certificate Action"
         {
             Caption = 'Action Date';
         }
-        field(30; "Action Type "; Option)
+        field(30; "Action Type"; Option)
         {
-            Caption = 'Action Type ';
+            Caption = 'Action Type';
             OptionMembers = Issued,Prolonged,Revoked;
         }
+
         field(40; "Expiration Date"; Date)
         {
             Caption = 'Expiration Date';
