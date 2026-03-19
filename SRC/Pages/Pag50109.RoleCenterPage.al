@@ -11,6 +11,10 @@ page 50109 "Role Center Page"
             {
                 ApplicationArea = All;
             }
+            part(CertificateCue; "Certificate Cue Page")
+            {
+                ApplicationArea = All;
+            }
             part(CertificateActivities; "Item CertificateFactBox")
             {
                 ApplicationArea = All;
@@ -18,11 +22,6 @@ page 50109 "Role Center Page"
             part(ItemCertificates; "Item Certificate ListPart")
             {
                 ApplicationArea = All;
-            }
-            part("Item Certificate FactBox"; "Item CertificateFactBox")
-            {
-                ApplicationArea = All;
-
             }
         }
     }
@@ -35,14 +34,17 @@ page 50109 "Role Center Page"
                 action("Certificate List")
                 {
                     RunObject = Page "Item Certificate List";
+                    ApplicationArea = All;
                 }
                 action("Certificate Authorities")
                 {
                     RunObject = Page "Item CA List";
+                    ApplicationArea = All;
                 }
                 action("Certificate Actions")
                 {
                     RunObject = Page "Actions List";
+                    ApplicationArea = All;
                 }
 
             }
@@ -53,10 +55,12 @@ page 50109 "Role Center Page"
             {
                 RunObject = Page "Item Certificate Card";
                 RunPageMode = Create;
+                ApplicationArea = All;
             }
             action("Validate Certificates")
             {
                 RunObject = page "Item Certificate ListPart";
+                ApplicationArea = All;
             }
         }
         area(Processing)

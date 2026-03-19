@@ -27,6 +27,18 @@ table 50100 "Item Certificate"
         {
             Caption = 'Last Prolonged Date';
         }
+        field(60; Status; Option)
+        {
+            DataClassification = ToBeClassified;
+            OptionMembers = Open,"Pending Approval",Approved,Rejected;
+            Caption = 'Status';
+            Editable = false;
+        }
+        field(70; "Approver User Id"; Code[50])
+        {
+            DataClassification = ToBeClassified;
+            TableRelation = User."User Name";
+        }
     }
     keys
     {

@@ -48,12 +48,91 @@ page 50101 "Item Certificate Card"
                     ApplicationArea = All;
                     ToolTip = 'Specifies the value of the Last Prolonged Date field.', Comment = '%';
                 }
+                field(Status; Rec.Status)
+                {
+                    ApplicationArea = All;
+                    ToolTip = 'Specifies the value of the Status field.', Comment = '%';
+                    Style = Strong;
+                    StyleExpr = true;
+                }
+                field("Approver User Id"; Rec."Approver User Id")
+                {
+                    ApplicationArea = All;
+                    ToolTip = 'Specifies the value of the Approver User Id field.', Comment = '%';
+                }
             }
             part(ItemListPart; "Item Certificate Action ListPa")
             {
                 ApplicationArea = All;
                 SubPageLink = "Certificate No." = field("No.");
                 Caption = 'Item Certificate Action ListPart';
+            }
+        }
+    }
+    actions
+    {
+        area(Processing)
+        {
+            action("Send For Approval")
+            {
+                Caption = 'Send For Approval';
+                ApplicationArea = All;
+                Enabled = Rec.Status = Rec.Status::Open;
+                trigger OnAction()
+                begin
+                    Rec.Status := Rec.Status::"Pending Approval";
+                    Rec.Modify();
+                    Message('Certificate %1 is sent for approval.', Rec."No.");
+                end;
+            }
+            action(Approve)
+            {
+                Caption = 'Approve';
+                ApplicationArea = All;
+                Enabled = Rec.Status = Rec.Status::"Pending Approval";
+                Visible = (UserId = Rec."Approver User ID");
+                trigger OnAction()
+                begin
+                    if UserId <> Rec."Approver User Id" then
+                        Error('Only the assigned approver can approve this certificate.');
+                    if Rec.Status <> Rec.Status::"Pending Approval" then
+                        Error('Only certificates with status "Pending Approval" can be approved.');
+                    Rec.Status := Rec.Status::Approved;
+                    Rec.Modify();
+                    Message('Certificate %1 is approved.', Rec."No.");
+                end;
+            }
+            action(Reject)
+            {
+                Caption = 'Reject';
+                ApplicationArea = All;
+                Enabled = Rec.Status = Rec.Status::"Pending Approval";
+                Visible = (UserId = Rec."Approver User ID");
+                trigger OnAction()
+                begin
+                    if UserId <> Rec."Approver User Id" then
+                        Error('Only the assigned approver can reject this certificate.');
+                    if Rec.Status <> Rec.Status::"Pending Approval" then
+                        Error('Only certificates with status "Pending Approval" can be rejected.');
+                    Rec.Status := Rec.Status::Rejected;
+                    Rec.Modify();
+                    Message('Certificate %1 is rejected.', Rec."No.");
+                end;
+            }
+            action(Reopen)
+            {
+                Caption = 'Reopen';
+                ApplicationArea = All;
+                Enabled = Rec.Status = Rec.Status::Rejected;
+                trigger OnAction()
+                begin
+                    if Rec.Status <> Rec.Status::Rejected then
+                        Error('Only certificates with status "Rejected" can be reopened.');
+                    Rec.Status := Rec.Status::Open;
+                    Rec.Modify();
+                    Message('Certificate %1 is reopened.', Rec."No.");
+                end;
+
             }
         }
     }
