@@ -22,7 +22,7 @@ page 50110 "Certificate Cue Page"
                         CertRec: Record "Item Certificate Action";
                     begin
                         CertRec.SetFilter("Expiration Date", '<=%1', Today());
-                        Page.Run(Page::"Item Certificate List", CertRec);
+                        Page.Run(Page::"Actions List", CertRec);
                     end;
                 }
                 field("Expiring soon"; Rec."Expiring soon")
@@ -34,7 +34,7 @@ page 50110 "Certificate Cue Page"
                         CertRec: Record "Item Certificate Action";
                     begin
                         CertRec.SetFilter("Expiration Date", '%1..%2', Today(), Today() + 30);
-                        Page.Run(Page::"Item Certificate List", CertRec);
+                        Page.Run(Page::"Actions List", CertRec);
                     end;
                 }
                 field("Active Certificates"; Rec."Active Certificates")

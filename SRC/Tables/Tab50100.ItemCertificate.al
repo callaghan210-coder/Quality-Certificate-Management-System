@@ -17,6 +17,8 @@ table 50100 "Item Certificate"
         field(30; "Item No"; Code[20])
         {
             Caption = 'Item No';
+            TableRelation = Item."No." where(Type = const(Inventory));
+
         }
         field(40; "Issued Date"; Date)
         {
@@ -26,10 +28,9 @@ table 50100 "Item Certificate"
         {
             Caption = 'Last Prolonged Date';
         }
-        field(60; Status; Option)
+        field(60; Status; Enum "Item Cert Status")
         {
             DataClassification = ToBeClassified;
-            OptionMembers = Open,"Pending Approval",Approved,Rejected;
             Caption = 'Status';
             Editable = false;
         }

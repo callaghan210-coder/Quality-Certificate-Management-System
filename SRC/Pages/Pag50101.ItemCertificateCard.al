@@ -90,10 +90,9 @@ page 50101 "Item Certificate Card"
                 Caption = 'Approve';
                 ApplicationArea = All;
                 Enabled = Rec.Status = Rec.Status::"Pending Approval";
-                Visible = (UserId = Rec."Approver User ID");
                 trigger OnAction()
                 begin
-                    if UserId <> Rec."Approver User Id" then
+                    if UserId() <> Rec."Approver User Id" then
                         Error('Only the assigned approver can approve this certificate.');
                     if Rec.Status <> Rec.Status::"Pending Approval" then
                         Error('Only certificates with status "Pending Approval" can be approved.');
@@ -107,10 +106,9 @@ page 50101 "Item Certificate Card"
                 Caption = 'Reject';
                 ApplicationArea = All;
                 Enabled = Rec.Status = Rec.Status::"Pending Approval";
-                Visible = (UserId = Rec."Approver User Id");
                 trigger OnAction()
                 begin
-                    if UserId <> Rec."Approver User Id" then
+                    if UserId() <> Rec."Approver User Id" then
                         Error('Only the assigned approver can reject this certificate.');
                     if Rec.Status <> Rec.Status::"Pending Approval" then
                         Error('Only certificates with status "Pending Approval" can be rejected.');

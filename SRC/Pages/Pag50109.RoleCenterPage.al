@@ -15,11 +15,11 @@ page 50109 "Role Center Page"
             {
                 ApplicationArea = All;
             }
-            part(CertificateActivities; "Item CertificateFactBox")
+            part(ItemCertificates; "Item Certificate ListPart")
             {
                 ApplicationArea = All;
             }
-            part(ItemCertificates; "Item Certificate ListPart")
+            part(CertificateActivities; "Item CertificateFactBox")
             {
                 ApplicationArea = All;
             }
