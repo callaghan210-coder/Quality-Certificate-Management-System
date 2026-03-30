@@ -1,16 +1,20 @@
 enum 50100 ActionTypeEnum
 {
     Extensible = true;
-    
-    value(0; Issued)
+    value(0; " ")
+    {
+        Caption = ' ';
+    }
+
+    value(1; Issued)
     {
         Caption = 'Issued';
     }
-    value(1; Prolonged)
+    value(2; Prolonged)
     {
         Caption = 'Prolonged';
     }
-    value(2; Revoked)
+    value(3; Revoked)
     {
         Caption = 'Revoked';
     }

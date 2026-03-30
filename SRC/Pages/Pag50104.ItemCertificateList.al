@@ -42,4 +42,5 @@ page 50104 "Item Certificate List"
             }
         }
     }
+
 }

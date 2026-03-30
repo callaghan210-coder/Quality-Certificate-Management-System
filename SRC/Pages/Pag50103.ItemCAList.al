@@ -3,7 +3,7 @@ page 50103 "Item CA List"
     Caption = 'Item CA List';
     PageType = Card;
     SourceTable = "Certification Authority";
-    
+
     layout
     {
         area(Content)
@@ -11,7 +11,7 @@ page 50103 "Item CA List"
             group(General)
             {
                 Caption = 'General';
-                
+
                 field("Code"; Rec."Code")
                 {
                     ApplicationArea = All;
@@ -25,4 +25,5 @@ page 50103 "Item CA List"
             }
         }
     }
+
 }
