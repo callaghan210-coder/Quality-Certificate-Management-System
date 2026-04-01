@@ -7,7 +7,7 @@ page 50109 "Role Center Page"
     {
         area(RoleCenter)
         {
-            part(Headline; "Headline RC Business Manager")
+            part(Headline; "RCHeadLine")
             {
                 ApplicationArea = All;
             }
