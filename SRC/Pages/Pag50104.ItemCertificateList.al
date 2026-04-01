@@ -1,7 +1,7 @@
 page 50104 "Item Certificate List"
 {
     Caption = 'Item Certificate List';
-    PageType = Card;
+    PageType = List;
     SourceTable = "Item Certificate";
     UsageCategory = Administration;
     ApplicationArea = All;
@@ -18,6 +18,11 @@ page 50104 "Item Certificate List"
                 {
                     ApplicationArea = All;
                     ToolTip = 'Specifies the value of the No. field.', Comment = '%';
+                }
+                field(Description; Rec.Description)
+                {
+                    ApplicationArea = All;
+                    ToolTip = 'Specifies the value of the Description field.', Comment = '%';
                 }
                 field("CA Code"; Rec."CA Code")
                 {

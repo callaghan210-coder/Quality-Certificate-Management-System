@@ -3,7 +3,7 @@ page 50108 "Item Certificate ListPart"
     Caption = 'Item Certificate ListPart';
     PageType = ListPart;
     SourceTable = "Item Certificate";
-    
+
     layout
     {
         area(Content)
@@ -14,6 +14,16 @@ page 50108 "Item Certificate ListPart"
                 {
                     ApplicationArea = All;
                     ToolTip = 'Specifies the value of the No. field.', Comment = '%';
+                }
+                field(Description; Rec.Description)
+                {
+                    ApplicationArea = All;
+                    ToolTip = 'Specifies the value of the Description field.', Comment = '%';
+                }
+                field(Status; Rec.Status)
+                {
+                    ApplicationArea = All;
+                    ToolTip = 'Specifies the value of the Status field.', Comment = '%';
                 }
                 field("CA Code"; Rec."CA Code")
                 {

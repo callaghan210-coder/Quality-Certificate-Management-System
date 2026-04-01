@@ -1,12 +1,23 @@
 xmlport 50100 ItemCertificatesXMLPort
 {
     Caption = 'ItemCertificatesXMLPort';
+    Direction = Import;
+
     schema
     {
-        textelement(RootNodeName)
+        textelement(Root)
         {
-            tableelement(; "")
+            tableelement(Certificate; "Item Certificate")
             {
+                fieldelement("No."; Certificate."No.")
+                {
+                }
+                fieldelement(Description; Certificate.Description)
+                {
+                }
+                fieldelement(status; Certificate.Status)
+                {
+                }
             }
         }
     }

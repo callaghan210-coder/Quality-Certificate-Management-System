@@ -67,6 +67,13 @@ page 50102 "Actions Card"
                     Actionmgt.ProcessAction(Rec);
                 end;
             }
+            action(ImportCertificates)
+            {
+                trigger OnAction()
+                begin
+                    Xmlport.Run(Xmlport::ItemCertificatesXMLPort);
+                end;
+            }
         }
     }
 }

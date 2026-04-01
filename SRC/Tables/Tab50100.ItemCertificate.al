@@ -39,6 +39,10 @@ table 50100 "Item Certificate"
             DataClassification = ToBeClassified;
             TableRelation = User."User Name";
         }
+        field(80; Description; Text[250])
+        {
+            DataClassification = ToBeClassified;
+        }
     }
     keys
     {
