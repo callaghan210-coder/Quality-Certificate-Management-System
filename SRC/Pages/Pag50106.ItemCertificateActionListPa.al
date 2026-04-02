@@ -5,6 +5,7 @@ page 50106 "Item Certificate Action ListPa"
     SourceTable = "Item Certificate Action";
     UsageCategory = Administration;
     ApplicationArea = All;
+    CardPageId = "Item Certificate Card";
 
     layout
     {

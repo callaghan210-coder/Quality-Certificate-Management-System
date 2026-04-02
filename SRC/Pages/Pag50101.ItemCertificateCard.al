@@ -3,8 +3,8 @@ page 50101 "Item Certificate Card"
     Caption = 'Item Certificate Card';
     PageType = Card;
     SourceTable = "Item Certificate";
-    //UsageCategory = Administration;
-    //ApplicationArea = All;
+    UsageCategory = Administration;
+    ApplicationArea = All;
 
     layout
     {

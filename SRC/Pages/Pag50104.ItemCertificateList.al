@@ -3,14 +3,15 @@ page 50104 "Item Certificate List"
     Caption = 'Item Certificate List';
     PageType = List;
     SourceTable = "Item Certificate";
-    UsageCategory = Administration;
+    UsageCategory = Lists;
     ApplicationArea = All;
+    CardPageId = "Item Certificate Card";
 
     layout
     {
         area(Content)
         {
-            group(General)
+            repeater(General)
             {
                 Caption = 'General';
 
@@ -23,6 +24,11 @@ page 50104 "Item Certificate List"
                 {
                     ApplicationArea = All;
                     ToolTip = 'Specifies the value of the Description field.', Comment = '%';
+                }
+                field(Status; Rec.Status)
+                {
+                    ApplicationArea = All;
+                    ToolTip = 'Specifies the value of the Status field.', Comment = '%';
                 }
                 field("CA Code"; Rec."CA Code")
                 {
