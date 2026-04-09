@@ -132,6 +132,30 @@ page 50101 "Item Certificate Card"
                 end;
 
             }
+            action(ProcessFile)
+            {
+                Caption = 'Process File';
+                ApplicationArea = All;
+
+                trigger OnAction()
+                var
+                    FileMgt: Codeunit FileProcessingMgt;
+                begin
+                    FileMgt.ProcessFile();
+                end;
+            }
+            action(Yastream)
+            {
+                Caption = 'Yastream';
+                ApplicationArea = All;
+
+                trigger OnAction()
+                var
+                    FileMgt: Codeunit Yastream;
+                begin
+                    FileMgt.WriteToaFile();
+                end;
+            }
         }
     }
 
