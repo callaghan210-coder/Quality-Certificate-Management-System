@@ -156,7 +156,61 @@ page 50101 "Item Certificate Card"
                     FileMgt.WriteToaFile();
                 end;
             }
-        }
-    }
+            action(Update)
+            {
+                Promoted = true;
+                PromotedIsBig = true;
+                PromotedCategory = Process;
+                Caption = 'Update';
+                ApplicationArea = All;
 
+                trigger OnAction()
+                begin
+                    Rec.ModifyAction();
+                end;
+
+            }
+            action(DeleteAction)
+            {
+                Promoted = true;
+                PromotedIsBig = true;
+                PromotedCategory = Process;
+                Caption = 'Delete Action';
+                ApplicationArea = All;
+
+                trigger OnAction()
+                begin
+                    Rec.DeleteAction();
+                end;
+            }
+            action(EventTest)
+            {
+                Caption = 'Event Test';
+                ApplicationArea = All;
+
+                trigger OnAction()
+                var
+                    Demo: Codeunit DemoCodeunit;
+                begin
+                    Demo.RunDemo();
+                end;
+            }
+            action(MyEventTest)
+            {
+                Caption = 'My Event Test';
+                ApplicationArea = All;
+                Promoted = true;
+                PromotedIsBig = true;
+                PromotedCategory = Process;
+
+                trigger OnAction()
+                var
+                    MyEvent: Codeunit MyEvent;
+                begin
+                    MyEvent.RunMyEvent();
+                end;
+            }
+        }
+
+    }
 }

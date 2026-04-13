@@ -50,5 +50,39 @@ table 50100 "Item Certificate"
         {
             Clustered = true;
         }
+        key(pk2; "Item No", "CA Code")
+        {
+        }
     }
+
+    trigger OnDelete()
+    begin
+        DeleteAction();
+    end;
+
+    trigger OnModify()
+    begin
+        ModifyAction();
+    end;
+
+    procedure ModifyAction()
+    var
+        certaction: Record "Item Certificate Action";
+    begin
+        certaction.SetRange("Certificate No.", Rec."No.");
+        if Rec.Status = Rec.Status::Open then
+            certaction.ModifyAll("Item No.", rec."Item No");
+    end;
+
+    procedure DeleteAction()
+    var
+        certaction: Record "Item Certificate Action";
+    begin
+        certaction.SetRange("Certificate No.", Rec."No.");
+        if Rec.Status = Rec.Status::Open then
+            certaction.DeleteAll();
+    end;
+
+
+
 }

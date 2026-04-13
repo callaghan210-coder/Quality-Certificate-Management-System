@@ -24,6 +24,11 @@ table 50102 "Item Certificate Action"
         field(40; "Expiration Date"; Date)
         {
             Caption = 'Expiration Date';
+            trigger OnValidate()
+            begin
+                if "Expiration Date" < "Action Date" then
+                    Error('Expiration Date cannot be earlier than Action Date.');
+            end;
         }
         field(50; "Item No."; Code[20])
         {
@@ -50,4 +55,34 @@ table 50102 "Item Certificate Action"
             Clustered = true;
         }
     }
+    trigger OnInsert()
+    begin
+        NotblankAction();
+        ItemValidate();
+    end;
+
+    procedure NotblankAction();
+    begin
+        // if "Action Date" = 0D then
+        //     Error('Action Date cannot be blank.');
+        // if "Expiration Date" = 0D then
+        //     Error('Expiration Date cannot be blank.');
+        // if "Action Type" = " " then
+        //     Error('Action Type cannot be blank.');
+        TestField("Action Date");
+        TestField("Action Type");
+        if "Action Type" <> "Action Type"::Revoked then
+            TestField("Expiration Date");
+    end;
+
+    procedure ItemValidate()
+    var
+        ItemRec: Record Item;
+    begin
+        // if ItemRec.Get("Item No.") then
+        //     Validate("Item No.");
+        // if not ItemRec.Get("Item No.") then
+        //     Error('Item No. %1 does not exist.', "Item No.");
+    end;
+
 }

@@ -17,6 +17,7 @@ page 50106 "Item Certificate Action ListPa"
                 {
                     ApplicationArea = All;
                     ToolTip = 'Specifies the value of the Action Date field.', Comment = '%';
+
                 }
                 field("Action Type"; Rec."Action Type")
                 {
