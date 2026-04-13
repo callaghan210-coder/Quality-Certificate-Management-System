@@ -8,6 +8,37 @@ table 50100 "Item Certificate"
         field(10; "No."; Code[20])
         {
             Caption = 'No.';
+            Editable = false;
+        }
+        field(11; "No. Series"; Code[20])
+        {
+            Caption = 'No. Series';
+            TableRelation = "No. Series";
+            Editable = false;
+            trigger OnValidate()
+            begin
+                if "No." <> xRec."No." then begin
+                    SalesSetup.Get();
+                    NoSeriesMgt.TestManual(SalesSetup."CERT NO.");
+                    "No. Series" := '';
+                end;
+
+            end;
+        }
+        field(12; "CERT NO."; Code[10])
+        {
+            Caption = 'CERT NO.';
+            DataClassification = ToBeClassified;
+            TableRelation = "No. Series";
+            trigger OnValidate()
+            begin
+                if "CERT NO." = xRec."CERT NO." then begin
+                    SalesSetup.Get();
+                    NoSeriesMgt.TestManual(SalesSetup."CERT NO.");
+                    "No. Series" := '';
+                end;
+
+            end;
         }
         field(20; "CA Code"; Code[20])
         {
@@ -43,6 +74,11 @@ table 50100 "Item Certificate"
         {
             DataClassification = ToBeClassified;
         }
+        field(81; "User Id"; Code[50])
+        {
+            DataClassification = ToBeClassified;
+            TableRelation = "User Setup";
+        }
     }
     keys
     {
@@ -54,6 +90,21 @@ table 50100 "Item Certificate"
         {
         }
     }
+    var
+        SalesSetup: Record "Sales & Receivables Setup";
+        NoSeriesMgt: Codeunit NoSeriesManagement;
+        Noseries: Record "No. Series";
+
+
+    trigger OnInsert()
+    begin
+        if "No." = '' then begin
+            SalesSetup.Get();
+            SalesSetup.TestField("CERT NO.");
+            //   NoSeriesMgt.InitSeries(SalesSetup."CERT NO.", xRec."No. Series", 0D, "No.", "No. Series");
+            "No." := NoSeriesMgt.GetNextNo(SalesSetup."CERT NO.", Today, true);
+        end;
+    end;
 
     trigger OnDelete()
     begin

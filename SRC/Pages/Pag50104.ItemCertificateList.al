@@ -20,6 +20,11 @@ page 50104 "Item Certificate List"
                     ApplicationArea = All;
                     ToolTip = 'Specifies the value of the No. field.', Comment = '%';
                 }
+                // field("CERT NO."; Rec."CERT NO.")
+                // {
+                //     ApplicationArea = All;
+                //     ToolTip = 'Specifies the value of the CERT NO. field.', Comment = '%';
+                // }
                 field(Description; Rec.Description)
                 {
                     ApplicationArea = All;

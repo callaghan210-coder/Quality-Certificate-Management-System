@@ -28,6 +28,11 @@ page 50101 "Item Certificate Card"
                     ApplicationArea = All;
                     ToolTip = 'Specifies the value of the No. field.', Comment = '%';
                 }
+                // field("CERT NO."; Rec."CERT NO.")
+                // {
+                //     ApplicationArea = All;
+                //     ToolTip = 'Specifies the value of the CERT NO. field.', Comment = '%';
+                // }
                 field("CA Code"; Rec."CA Code")
                 {
                     ApplicationArea = All;
@@ -37,11 +42,13 @@ page 50101 "Item Certificate Card"
                 {
                     ApplicationArea = All;
                     ToolTip = 'Specifies the value of the Item No field.', Comment = '%';
+                    Visible = approver;
                 }
                 field("Issued Date"; Rec."Issued Date")
                 {
                     ApplicationArea = All;
                     ToolTip = 'Specifies the value of the Issued Date field.', Comment = '%';
+                    Visible = approver;
                 }
                 field("Last Prolonged Date"; Rec."Last Prolonged Date")
                 {
@@ -54,6 +61,11 @@ page 50101 "Item Certificate Card"
                     ToolTip = 'Specifies the value of the Status field.', Comment = '%';
                     Style = Strong;
                     StyleExpr = true;
+                }
+                field("User Id"; Rec."User Id")
+                {
+                    ApplicationArea = All;
+
                 }
                 field("Approver User Id"; Rec."Approver User Id")
                 {
@@ -210,7 +222,43 @@ page 50101 "Item Certificate Card"
                     MyEvent.RunMyEvent();
                 end;
             }
+
         }
 
     }
+    trigger OnOpenPage()
+    begin
+        UserPermmision();
+        ApproveVisible();
+    end;
+
+    trigger OnAfterGetRecord()
+    var
+        myInt: Integer;
+    begin
+        ApproveVisible();
+    end;
+
+    procedure ApproveVisible()
+    begin
+        approver := false;
+        if Rec.Status = Rec.Status::Approved then
+            approver := true;
+    end;
+
+    var
+        approver: Boolean;
+        UserSetup: Record "User Setup";
+
+    procedure UserPermmision()
+    begin
+        Rec.Reset();
+        //Rec.SetRange("No.",Rec."No.");
+        UserSetup.Get(UserId());
+        if not UserSetup."Is Manager" then
+            Error('You do not have permission to view the details of this certificate.');
+    end;
+
+
+
 }
