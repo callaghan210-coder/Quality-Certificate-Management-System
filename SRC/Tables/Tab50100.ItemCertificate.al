@@ -79,6 +79,11 @@ table 50100 "Item Certificate"
             DataClassification = ToBeClassified;
             TableRelation = "User Setup";
         }
+        field(90; "Expiry Date"; Date)
+        {
+            Caption = 'Expiry Date';
+            Editable = false;
+        }
     }
     keys
     {

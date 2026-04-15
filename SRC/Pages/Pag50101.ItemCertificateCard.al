@@ -228,23 +228,23 @@ page 50101 "Item Certificate Card"
     }
     trigger OnOpenPage()
     begin
-        UserPermmision();
-        ApproveVisible();
+        // UserPermmision();
+        // ApproveVisible();
     end;
 
     trigger OnAfterGetRecord()
     var
         myInt: Integer;
     begin
-        ApproveVisible();
+        // ApproveVisible();
     end;
 
-    procedure ApproveVisible()
-    begin
-        approver := false;
-        if Rec.Status = Rec.Status::Approved then
-            approver := true;
-    end;
+    // procedure ApproveVisible()
+    // begin
+    //     approver := false;
+    //     if Rec.Status = Rec.Status::Approved then
+    //         approver := true;
+    // end;
 
     var
         approver: Boolean;
