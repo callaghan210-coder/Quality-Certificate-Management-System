@@ -14,7 +14,11 @@ enum 50100 ActionTypeEnum
     {
         Caption = 'Prolonged';
     }
-    value(3; Revoked)
+    value(3; Rejected)
+    {
+        Caption = 'Rejected';
+    }
+    value(4; Revoked)
     {
         Caption = 'Revoked';
     }

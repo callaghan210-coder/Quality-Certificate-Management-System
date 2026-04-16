@@ -26,6 +26,10 @@ table 50103 "Certificate Cue"
         {
             Caption = 'Revoked Certificates';
         }
+        field(6; "Rejected Certificates"; Integer)
+        {
+            Caption = 'Rejected Certificates';
+        }
     }
     keys
     {

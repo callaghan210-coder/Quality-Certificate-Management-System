@@ -49,16 +49,16 @@ page 50110 "Certificate Cue Page"
                         Page.Run(Page::"Actions List", CertRec);
                     end;
                 }
-                field("Revoked Certificates"; Rec."Revoked Certificates")
+                field("Rejected Certificates"; Rec."Rejected Certificates")
                 {
                     ApplicationArea = All;
-                    ToolTip = 'Specifies the value of the Revoked Certificates field.', Comment = '%';
+                    ToolTip = 'Specifies the value of the Rejected Certificates field.', Comment = '%';
                     trigger OnDrillDown()
                     var
-                        CertAction: Record "Item Certificate Action";
+                        CertRecord: Record "Item Certificate";
                     begin
-                        CertAction.SetRange("Action Type", CertAction."Action Type"::Revoked);
-                        Page.Run(Page::"Actions List", CertAction);
+                        CertRecord.SetRange(Status, CertRecord.Status::Rejected);
+                        Page.Run(Page::"Item Certificate List", CertRecord);
                     end;
                 }
             }
@@ -72,6 +72,7 @@ page 50110 "Certificate Cue Page"
     local procedure LoadData()
     var
         Cert: Record "Item Certificate Action";
+        CertRecord: Record "Item Certificate";
     begin
         Rec.Init();
         Rec."Primary Key" := '1';
@@ -87,9 +88,9 @@ page 50110 "Certificate Cue Page"
         Cert.SetFilter("Expiration Date", '>%1', Today());
         Rec."Active Certificates" := Cert.Count();
         // Revoked
-        Cert.Reset();
-        Cert.SetRange("Action Type", Cert."Action Type"::Revoked);
-        Rec."Revoked Certificates" := Cert.Count();
+        CertRecord.Reset();
+        CertRecord.SetRange(Status, CertRecord.Status::Rejected);
+        Rec."Rejected Certificates" := CertRecord.Count();
         if not Rec.Insert() then
             Rec.Modify();
     end;

@@ -63,7 +63,7 @@ table 50100 "Item Certificate"
         {
             DataClassification = ToBeClassified;
             Caption = 'Status';
-            Editable = false;
+            // Editable = false;
         }
         field(70; "Approver User Id"; Code[50])
         {

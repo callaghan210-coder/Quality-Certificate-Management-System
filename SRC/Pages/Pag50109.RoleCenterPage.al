@@ -46,6 +46,11 @@ page 50109 "Role Center Page"
                     RunObject = Page "Actions List";
                     ApplicationArea = All;
                 }
+                action("Certificate Change Log")
+                {
+                    RunObject = Page "CertificateChangeLog";
+                    ApplicationArea = All;
+                }
 
             }
         }
@@ -57,11 +62,11 @@ page 50109 "Role Center Page"
                 RunObject = Page "Item Certificate Card";
                 //RunPageMode = Create;
             }
-            action("Validate Certificates")
-            {
-                RunObject = page "Item Certificate ListPart";
-                ApplicationArea = All;
-            }
+            // action("Validate Certificates")
+            // {
+            //     RunObject = page "Item Certificate ListPart";
+            //     ApplicationArea = All;
+            // }
         }
         area(Processing)
         {
