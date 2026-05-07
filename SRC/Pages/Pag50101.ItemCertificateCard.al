@@ -42,8 +42,27 @@ page 50101 "Item Certificate Card"
                 {
                     ApplicationArea = All;
                     ToolTip = 'Specifies the value of the Item No field.', Comment = '%';
-                    Visible = approver;
+                    //Visible = approver;
                 }
+                field("Item Description"; Rec."Item Description")
+                {
+                    ApplicationArea = All;
+                    ToolTip = 'Specifies the value of the Item Description field.', Comment = '%';
+                    //Visible = approver;
+                }
+                field("Base Unit of Measure"; Rec."Base Unit of Measure")
+                {
+                    ApplicationArea = All;
+                    ToolTip = 'Specifies the value of the Base Unit of Measure field.', Comment = '%';
+                    //Visible = approver;
+                }
+                field("Unit Price"; Rec."Unit Price")
+                {
+                    ApplicationArea = All;
+                    ToolTip = 'Specifies the value of the Unit Price field.', Comment = '%';
+                    //Visible = approver;
+                }
+
                 field("Issued Date"; Rec."Issued Date")
                 {
                     ApplicationArea = All;
@@ -88,62 +107,81 @@ page 50101 "Item Certificate Card"
             action("Send For Approval")
             {
                 Caption = 'Send For Approval';
+                Promoted = true;
+                PromotedIsBig = true;
+                PromotedCategory = Process;
                 ApplicationArea = All;
                 Enabled = Rec.Status = Rec.Status::Open;
                 trigger OnAction()
+                var
+                    CertWorkflow: Codeunit CertWorkflowTrigger;
                 begin
-                    Rec.Status := Rec.Status::"Pending Approval";
-                    Rec.Modify();
-                    Message('Certificate %1 is sent for approval.', Rec."No.");
+                    CertWorkflow.SendForApproval(Rec);
                 end;
             }
-            action(Approve)
+            action("Cancel Approval Request")
             {
-                Caption = 'Approve';
+                Caption = 'Cancel Approval Request';
                 ApplicationArea = All;
+                Promoted = true;
+                PromotedIsBig = true;
+                PromotedCategory = Process;
                 Enabled = Rec.Status = Rec.Status::"Pending Approval";
+
                 trigger OnAction()
+                var
+                    CertWorkflow: Codeunit CertWorkflowTrigger;
                 begin
-                    if UserId() <> Rec."Approver User Id" then
-                        Error('Only the assigned approver can approve this certificate.');
-                    if Rec.Status <> Rec.Status::"Pending Approval" then
-                        Error('Only certificates with status "Pending Approval" can be approved.');
-                    Rec.Status := Rec.Status::Approved;
-                    Rec.Modify();
-                    Message('Certificate %1 is approved.', Rec."No.");
-                end;
-            }
-            action(Reject)
-            {
-                Caption = 'Reject';
-                ApplicationArea = All;
-                Enabled = Rec.Status = Rec.Status::"Pending Approval";
-                trigger OnAction()
-                begin
-                    if UserId() <> Rec."Approver User Id" then
-                        Error('Only the assigned approver can reject this certificate.');
-                    if Rec.Status <> Rec.Status::"Pending Approval" then
-                        Error('Only certificates with status "Pending Approval" can be rejected.');
-                    Rec.Status := Rec.Status::Rejected;
-                    Rec.Modify();
-                    Message('Certificate %1 is rejected.', Rec."No.");
+                    CertWorkflow.CancelApproval(Rec);
                 end;
             }
             action(Reopen)
             {
                 Caption = 'Reopen';
                 ApplicationArea = All;
+                Promoted = true;
+                PromotedIsBig = true;
+                PromotedCategory = Process;
                 Enabled = Rec.Status = Rec.Status::Rejected;
+
                 trigger OnAction()
                 begin
-                    if Rec.Status <> Rec.Status::Rejected then
-                        Error('Only certificates with status "Rejected" can be reopened.');
                     Rec.Status := Rec.Status::Open;
                     Rec.Modify();
-                    Message('Certificate %1 is reopened.', Rec."No.");
                 end;
-
             }
+
+            // action(Reject)
+            // {
+            //     Caption = 'Reject';
+            //     ApplicationArea = All;
+            //     Enabled = Rec.Status = Rec.Status::"Pending Approval";
+            //     trigger OnAction()
+            //     begin
+            //         if UserId() <> Rec."Approver User Id" then
+            //             Error('Only the assigned approver can reject this certificate.');
+            //         if Rec.Status <> Rec.Status::"Pending Approval" then
+            //             Error('Only certificates with status "Pending Approval" can be rejected.');
+            //         Rec.Status := Rec.Status::Rejected;
+            //         Rec.Modify();
+            //         Message('Certificate %1 is rejected.', Rec."No.");
+            //     end;
+            // }
+            // action(Reopen)
+            // {
+            //     Caption = 'Reopen';
+            //     ApplicationArea = All;
+            //     Enabled = Rec.Status = Rec.Status::Rejected;
+            //     trigger OnAction()
+            //     begin
+            //         if Rec.Status <> Rec.Status::Rejected then
+            //             Error('Only certificates with status "Rejected" can be reopened.');
+            //         Rec.Status := Rec.Status::Open;
+            //         Rec.Modify();
+            //         Message('Certificate %1 is reopened.', Rec."No.");
+            //     end;
+
+            // }
             action(ProcessFile)
             {
                 Caption = 'Process File';

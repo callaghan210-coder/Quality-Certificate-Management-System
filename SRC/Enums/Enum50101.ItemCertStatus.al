@@ -1,7 +1,7 @@
 enum 50101 "Item Cert Status"
 {
     Extensible = true;
-    
+
     value(0; Open)
     {
         Caption = 'Open';
@@ -18,4 +18,8 @@ enum 50101 "Item Cert Status"
     {
         Caption = 'Rejected';
     }
+    // value(4; Reopen)
+    // {
+    //     Caption = 'Reopen';
+    // }
 }

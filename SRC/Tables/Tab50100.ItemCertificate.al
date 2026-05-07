@@ -50,6 +50,43 @@ table 50100 "Item Certificate"
             Caption = 'Item No';
             TableRelation = Item."No." where(Type = const(Inventory));
 
+            trigger OnValidate()
+            var
+                item: Record "Item";
+            begin
+                item.Reset();
+                if "Item No" <> '' then begin
+                    if item.Get("Item No") then begin
+                        "Item Description" := item.Description;
+                        "Base Unit of Measure" := item."Base Unit of Measure";
+                        "Unit Price" := item."Unit Price";
+                        Rec.Modify();
+                    end else begin
+                        Clear("Item Description");
+                        Clear("Base Unit of Measure");
+                        Clear("Unit Price");
+                    end;
+                end else begin
+                    Clear("Item Description");
+                    Clear("Base Unit of Measure");
+                    Clear("Unit Price");
+                end;
+            end;
+
+        }
+        field(31; "Item Description"; Text[20])
+        {
+            DataClassification = ToBeClassified;
+            Caption = 'Item Description';
+        }
+        field(32; "Unit Price"; Decimal)
+        {
+            DataClassification = ToBeClassified;
+        }
+        field(33; "Base Unit of Measure"; Code[10])
+        {
+            DataClassification = ToBeClassified;
+            Caption = 'Base Unit of Measure';
         }
         field(40; "Issued Date"; Date)
         {
@@ -58,12 +95,18 @@ table 50100 "Item Certificate"
         field(50; "Last Prolonged Date"; Date)
         {
             Caption = 'Last Prolonged Date';
+            trigger OnValidate()
+            var
+                myInt: Integer;
+            begin
+                Validate("Item No");
+            end;
         }
         field(60; Status; Enum "Item Cert Status")
         {
             DataClassification = ToBeClassified;
             Caption = 'Status';
-            // Editable = false;
+            Editable = false;
         }
         field(70; "Approver User Id"; Code[50])
         {
